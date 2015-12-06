@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<form class="form-horizontal" data-ng-submit="sendForm()" ng-controller="FormController" name="myForm" novalidate>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Full Name:</label>
+        <div class="col-sm-10">
+            <input type="text" name="FullName" ng-model="FullName" placeholder="Enter Name" required>
+            <span style="color:red" ng-show="myForm.FullName.$dirty && myForm.FullName.$invalid">
+                <span ng-show="myForm.Name.$error.required">Name is required.</span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Blood Group :</label>
+        <div class="col-sm-10">
+            <select data-ng-options="o for o in BloodGroups" data-ng-model="BloodGroup"></select>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <label class="col-lg-2 control-label">Date of Birth :</label>
+
+        <div class="col-lg-10">
+            <p class="input-group">
+                <input type="text" id="dateOfBirth" class="form-control" ng-model="DateOfBirth" uib-datepicker-popup="{{format}}" is-open="status.opened1"
+                       max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-change="validateAge()" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </p>
+            <span style="color:red" ng-show="IsUnderAge">Age Under 18 is not allowed to Donate.</span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Phone Number:</label>
+        <div class="col-sm-10">
+            <input type="text" name="PhoneNumber" ng-model="PhoneNumber" placeholder="Enter Phone Number " required>
+            <span style="color:red" ng-show="myForm.PhoneNumber.$dirty && myForm.PhoneNumber.$invalid">
+                <span ng-show="myForm.Phone.$error.required">Phone Number is required.</span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Email :</label>
+        <div class="col-sm-10">
+            <input type="email" ng-model="Email" name="Email" placeholder="Enter Email " required>
+            <span style="color:red" ng-show="myForm.Email.$dirty && myForm.Email.$invalid">
+                <span ng-show="myForm.Email.$error.required">Email is required.</span>
+                <span ng-show="myForm.Email.$error.email">Invalid email address.</span>
+            </span>
+            <span style="color:red" ng-show="IsEmailExist">Email Already Exist.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Last Date of Donation :</label>
+
+
+
+        <div class="col-sm-10">
+            <input type="text" id="dateOfBirth" class="form-control" ng-model="LastDonationDate" uib-datepicker-popup="{{format}}" is-open="status.opened2"
+                   max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+            <button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            <span style="color:red" ng-show="IsUnderAge">Age Under 18 is not allowed to Donate.</span>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Present Address :</label>
+        <div class="col-sm-10">
+            <textarea ng-model="PresentAddress" name="PresentAddress" ng-maxlength="100" required></textarea>
+            <span style="color:red" ng-show="myForm.PresentAddress.$dirty && myForm.PresentAddress.$invalid">
+                <span ng-show="myForm.Address.$error.required">Address is required.</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Password:</label>
+        <div class="col-sm-10">
+            <input type="password" ng-model="password1" placeholder="Password" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Confirm Password:</label>
+        <div class="col-sm-10">
+            <input type="password" ng-model="password" placeholder="Repeat Password" ng-blur="checkPasswordMismatch()" required>
+            <span style="color:red" ng-show="PasswordMismatch">Password didn't match.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-success" ng-disabled="myForm.$invalid || myForm.$pending">
+                <span class="glyphicon glyphicon-save"></span>  Make Profile
+            </button>
+        </div>
+    </div>
+
+</form>
